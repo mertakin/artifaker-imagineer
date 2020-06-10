@@ -1,0 +1,63 @@
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="container-fluid p-3">
+				<div class="row">
+					<div class="col-3">
+						<div class="list-group" id="list-tab" role="tablist">
+						 	<a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#fileupload" role="tab" aria-controls="home">Upload from File</a>
+						 	<a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#url_upload" role="tab" aria-controls="profile">Upload from URL</a>
+						</div>
+					</div>
+				 
+					<div class="col-9">
+						<div class="tab-content" id="nav-tabContent">
+							<div class="tab-pane fade show active" id="fileupload" role="tabpanel" aria-labelledby="list-home-list">
+								<div class="input-group mb-3">
+									<div class="custom-file">
+										<form action="{% url 'imageupload' %}" method="POST" enctype="multipart/form-data">
+											{% csrf_token %}
+											<input type="file" name="image_file" required>
+											<button type="submit" name="fileupload" class="btn btn-secondary btn-sm">Upload from File</button>
+										</form>
+									</div>
+								</div>
+							</div>
+
+							<div class="tab-pane fade" id="url_upload" role="tabpanel" aria-labelledby="list-profile-list">
+								<div class="form-group">
+									<div class="custom-file">
+										<form action="{% url 'imageupload' %}" method="POST" enctype= multipart/form-data>
+											{% csrf_token %}
+											<textarea class="form-control" name="image_file" rows="3"></textarea>
+											<button type="submit" name="url_upload" class="btn btn-secondary btn-sm">Upload from URL</button>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container mt-4 mb-2">
+	<div class="row">
+		<div class="col-12 text-center">
+			<button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">New Image</button>
+		</div>
+	</div>
+</div>
+
+<div class="container mt-2">
+	<div class="row">
+		{% for i in categories %}
+			<div class="col-3 mt-5 text-center ">
+				<a href="{% url 'category' category=i.category_slug %}" class="btn btn-secondary btn-sm btn-block">{{i.category_name}}</a>
+			</div>
+		{% endfor %}
+	</div>
+</div>

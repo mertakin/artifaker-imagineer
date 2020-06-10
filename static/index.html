@@ -1,0 +1,27 @@
+{% load static %}
+{% include "header.html" %}
+{% include "upload.html" %}
+
+
+
+<div class="container mt-4 mb-2">
+	<h1 class="mt-2 mb-3 text-center"> All Images </h1>
+
+	<div class="row">
+		{% for i in images %}
+			<div class="col-3 mt-3">
+				<a href="{% url 'review' image=i.image_file %}"> <img class="card-img-top" src="{{i.image_file.url}}" style="max-height: 10rem;"  alt="Card image cap"></a>
+			</div>
+		{% endfor %}
+
+		{% if not images %}
+			<div class="col-12 ">
+				<small>There are no images.</small>
+			</div>
+		{% endif %}
+	</div>
+</div>
+
+
+
+{% include "footer.html" %}
